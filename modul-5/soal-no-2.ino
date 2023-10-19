@@ -43,8 +43,6 @@ void setup_wifi() {
   Serial.println(WiFi.localIP());
 }
 
-//void callback(char* topic, byte* payload, unsigned int length){}
-
 void callback(char* topic, byte* payload, unsigned int length) {
   buffData = "";
   for (int i = 0; i < length; i++) {
@@ -60,11 +58,6 @@ void callback(char* topic, byte* payload, unsigned int length) {
   } else {
     digitalWrite(LED1, HIGH);
   }
-  /*if (strcmp(buffData.c_str(), "true") == 0) {
-    digitalWrite(LED1, LOW);
-  } else if (strcmp(buffData.c_str(), "false") == 0) {
-    digitalWrite(LED1, HIGH);
-  }*/
 }
 
 void reconnect() {
@@ -118,9 +111,9 @@ void kirimDetik() {
       Serial.print("Suhu: ");
       Serial.println(suhu);
       
-      char buffer[10]; // Buffer untuk mengonversi float menjadi string
-      dtostrf(suhu, 4, 2, buffer); // Mengonversi float menjadi string dengan 2 desimal
-      client.publish(topic, buffer); // Kirim suhu ke topik MQTT
+      char buffer[10];
+      dtostrf(suhu, 4, 2, buffer);
+      client.publish(topic, buffer);
     }
   }
 }
@@ -184,11 +177,9 @@ void callback(char* topicPub, byte* payload, unsigned int length) {
   Serial.println(buffData);
 
   if (buffData.toFloat() > 29.0) {
-    //Serial.print("true");
     ledStatus = true;
     kirimDetik();
   } else {
-    //Serial.print("false");
     ledStatus = false;
     kirimDetik();
   }
