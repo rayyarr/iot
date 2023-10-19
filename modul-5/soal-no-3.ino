@@ -63,7 +63,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
 void reconnect() {
   while (!client.connected()) {
     Serial.print("Menghubungkan MQTT... ");
-    String clientId = "ESP8266-Ray-";
+    String clientId = "ESP8266-";
     clientId += String(random(0xffff), HEX);
     if (client.connect(clientId.c_str())) {
       Serial.println("Berhasil");
@@ -188,7 +188,7 @@ void callback(char* topicPub, byte* payload, unsigned int length) {
 void reconnect() {
   while (!client.connected()) {
     Serial.print("Menghubungkan MQTT... ");
-    String clientId = "ESP8266-Ray-";
+    String clientId = "ESP32-";
     clientId += String(random(0xffff), HEX);
     if (client.connect(clientId.c_str())) {
       Serial.println("Berhasil");
